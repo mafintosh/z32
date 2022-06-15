@@ -6,6 +6,10 @@
   "dependencies": {
     "b4a": "^1.5.3"
   },
+  "devDependencies": {
+    "brittle": "^2.0.0",
+    "standard": "^17.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mafintosh/z32.git"
