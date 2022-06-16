@@ -1,4 +1,4 @@
-const b4a = require('b4a')
+import b4a from 'b4a'
 
 const ALPHABET = 'ybndrfg8ejkmcpqxot1uwisza345h769'.split('')
 const MIN = 49 // 0
@@ -12,10 +12,7 @@ for (let i = 0; i < ALPHABET.length; i++) {
   REVERSE[v] = i
 }
 
-exports.encode = encode
-exports.decode = decode
-
-function decode (s, out) {
+export function decode(s: string, out?: any): ArrayBuffer {
   let pb = 0
   let ps = 0
 
@@ -78,7 +75,7 @@ function decode (s, out) {
   return out.subarray(0, pb)
 }
 
-function encode (buf) {
+export function encode(buf: any): string {
   if (typeof buf === 'string') buf = b4a.from(buf)
 
   const max = buf.byteLength * 8
@@ -104,7 +101,7 @@ function encode (buf) {
   return s
 }
 
-function quintet (s, i) {
+function quintet(s: string, i: number) {
   if (i > s.length) {
     return 0
   }

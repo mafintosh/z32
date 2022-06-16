@@ -15,6 +15,7 @@
     "url": "https://github.com/mafintosh/z32.git"
   },
   "scripts": {
+    "build": "tsc",
     "test": "standard && brittle test.js"
   },
   "author": "Mathias Buus (@mafintosh)",

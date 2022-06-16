@@ -1,4 +1,4 @@
-const z32 = require('./')
+const z32 = require('./build/index')
 const b4a = require('b4a')
 const test = require('brittle')
 const crypto = require('crypto')
