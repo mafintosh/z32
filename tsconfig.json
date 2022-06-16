@@ -13,8 +13,7 @@
     "node_modules"
   ],
   "include": [
-    "**/*",
-    "locales/*.json"
+    "**/*"
   ],
   "lib": [
     "es2015"
