@@ -1,7 +1,7 @@
 const b4a = require('b4a')
 
 const ALPHABET = 'ybndrfg8ejkmcpqxot1uwisza345h769'
-const MIN = 0x30 // 0
+const MIN = 0x31 // 1
 const MAX = 0x7a // z
 const REVERSE = new Int8Array(1 + MAX - MIN)
 
