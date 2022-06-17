@@ -1,14 +1,14 @@
 const b4a = require('b4a')
 
-const ALPHABET = 'ybndrfg8ejkmcpqxot1uwisza345h769'.split('')
-const MIN = 49 // 0
-const MAX = 122 // z
+const ALPHABET = 'ybndrfg8ejkmcpqxot1uwisza345h769'
+const MIN = 0x30 // 0
+const MAX = 0x7a // z
 const REVERSE = new Int8Array(1 + MAX - MIN)
 
 REVERSE.fill(-1)
 
 for (let i = 0; i < ALPHABET.length; i++) {
-  const v = ALPHABET[i].charCodeAt(0) - MIN
+  const v = ALPHABET.charCodeAt(i) - MIN
   REVERSE[v] = i
 }
 
@@ -35,10 +35,10 @@ function decode (s, out) {
     const g = quintet(s, ps++)
     const h = quintet(s, ps++)
 
-    out[pb++] = (a << 3) | (b >> 2)
-    out[pb++] = ((b & 0b11) << 6) | (c << 1) | (d >> 4)
-    out[pb++] = ((d & 0b1111) << 4) | (e >> 1)
-    out[pb++] = ((e & 0b1) << 7) | (f << 2) | (g >> 3)
+    out[pb++] = (a << 3) | (b >>> 2)
+    out[pb++] = ((b & 0b11) << 6) | (c << 1) | (d >>> 4)
+    out[pb++] = ((d & 0b1111) << 4) | (e >>> 1)
+    out[pb++] = ((e & 0b1) << 7) | (f << 2) | (g >>> 3)
     out[pb++] = ((g & 0b111) << 5) | h
   }
 
@@ -47,27 +47,27 @@ function decode (s, out) {
   const a = quintet(s, ps++)
   const b = quintet(s, ps++)
 
-  out[pb++] = (a << 3) | (b >> 2)
+  out[pb++] = (a << 3) | (b >>> 2)
 
   if (r <= 2) return out.subarray(0, pb)
 
   const c = quintet(s, ps++)
   const d = quintet(s, ps++)
 
-  out[pb++] = ((b & 0b11) << 6) | (c << 1) | (d >> 4)
+  out[pb++] = ((b & 0b11) << 6) | (c << 1) | (d >>> 4)
 
   if (r <= 4) return out.subarray(0, pb)
 
   const e = quintet(s, ps++)
 
-  out[pb++] = ((d & 0b1111) << 4) | (e >> 1)
+  out[pb++] = ((d & 0b1111) << 4) | (e >>> 1)
 
   if (r <= 5) return out.subarray(0, pb)
 
   const f = quintet(s, ps++)
   const g = quintet(s, ps++)
 
-  out[pb++] = ((e & 0b1) << 7) | (f << 2) | (g >> 3)
+  out[pb++] = ((e & 0b1) << 7) | (f << 2) | (g >>> 3)
 
   if (r <= 7) return out.subarray(0, pb)
 
@@ -86,17 +86,17 @@ function encode (buf) {
   let s = ''
 
   for (let p = 0; p < max; p += 5) {
-    const i = p >> 3
+    const i = p >>> 3
     const j = p & 7
 
     if (j <= 3) {
-      s += ALPHABET[(buf[i] >> (3 - j)) & 0b11111]
+      s += ALPHABET[(buf[i] >>> (3 - j)) & 0b11111]
       continue
     }
 
     const of = j - 3
     const h = (buf[i] << of) & 0b11111
-    const l = (i >= buf.length ? 0 : buf[i + 1]) >> (8 - of)
+    const l = (i >= buf.byteLength ? 0 : buf[i + 1]) >>> (8 - of)
 
     s += ALPHABET[h | l]
   }
