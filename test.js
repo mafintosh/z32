@@ -47,3 +47,33 @@ test('bad inputs', function (t) {
     z32.decode('I1I1I1')
   })
 })
+
+test('loose decode', function (t) {
+  { const b = Buffer.from('The quick brown fox jumps over the lazy dog. 👀')
+    const s = z32.encode(b)
+    const o = z32.decode(s.toUpperCase(), { loose: true })
+
+    t.ok(b4a.equals(o, b))
+  }
+  {
+    const b = Buffer.from('The quick brown fox jumps over the lazy dog. 👀')
+    const s = z32.encode(b)
+
+    const looseMappings = {
+      2: 'z',
+      0: 'o',
+      l: '1',
+      v: 'u',
+      V: 'u'
+    }
+
+    for (const [loose, valid] of Object.entries(looseMappings)) {
+      const looseEncoded = s.replace(valid, loose)
+      t.exception(function () {
+        z32.decode(looseEncoded)
+      })
+      const o = z32.decode(looseEncoded, { loose: true })
+      t.ok(b4a.equals(o, b))
+    }
+  }
+})
