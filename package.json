@@ -7,7 +7,11 @@
     "b4a": "^1.5.3"
   },
   "devDependencies": {
+    "base-x": "^4.0.0",
+    "base32": "0.0.7",
     "brittle": "^2.0.0",
+    "nanobench": "^3.0.0",
+    "rfc4648": "^1.5.2",
     "standard": "^17.0.0"
   },
   "repository": {
@@ -15,7 +19,8 @@
     "url": "https://github.com/mafintosh/z32.git"
   },
   "scripts": {
-    "test": "standard && brittle test.js"
+    "test": "standard && brittle test.js",
+    "bench": "node benchmark.js"
   },
   "author": "Mathias Buus (@mafintosh)",
   "license": "MIT",
