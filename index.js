@@ -14,6 +14,7 @@ for (let i = 0; i < ALPHABET.length; i++) {
 
 exports.encode = encode
 exports.decode = decode
+exports.ALPHABET = ALPHABET
 
 function decode (s, out) {
   let pb = 0
