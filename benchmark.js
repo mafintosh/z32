@@ -21,7 +21,7 @@ bench('z32 encode 100 times', function (b) {
 
 bench('z32 decode 100 times', function (b) {
   const z32 = require('.')
-  const encoded = buffers.map(buf => z32.encode(buf))
+  const encoded = buffers.map((buf) => z32.encode(buf))
   b.start()
   for (let i = 0; i < 100; i++) {
     for (const s of encoded) {
@@ -44,7 +44,7 @@ bench("buf.toString('hex') 100 times", function (b) {
 })
 
 bench("Buffer.from(s, 'hex') 100 times", function (b) {
-  const encoded = buffers.map(buf => buf.toString('hex'))
+  const encoded = buffers.map((buf) => buf.toString('hex'))
   b.start()
   for (let i = 0; i < 100; i++) {
     for (const s of encoded) {
@@ -69,7 +69,7 @@ bench('base32 encode 100 times', function (b) {
 
 bench('base32 decode 100 times', function (b) {
   const base32 = require('base32')
-  const encoded = buffers.map(buf => base32.encode(buf))
+  const encoded = buffers.map((buf) => base32.encode(buf))
   b.start()
   for (let i = 0; i < 100; i++) {
     for (const s of encoded) {
@@ -94,7 +94,7 @@ bench('rfc4648.base32 encode 100 times', function (b) {
 
 bench('rfc4648.base32 decode 100 times', function (b) {
   const { base32 } = require('rfc4648')
-  const encoded = buffers.map(buf => base32.stringify(buf))
+  const encoded = buffers.map((buf) => base32.stringify(buf))
   b.start()
   for (let i = 0; i < 100; i++) {
     for (const s of encoded) {
@@ -121,7 +121,7 @@ bench('base-x z-base-32 encode 100 times', function (b) {
 bench('base-x z-base-32 decode 100 times', function (b) {
   const ZBASE32 = 'ybndrfg8ejkmcpqxot1uwisza345h769'
   const base32 = require('base-x')(ZBASE32)
-  const encoded = buffers.map(buf => base32.encode(buf))
+  const encoded = buffers.map((buf) => base32.encode(buf))
   b.start()
   for (let i = 0; i < 100; i++) {
     for (const s of encoded) {

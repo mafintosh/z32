@@ -16,7 +16,10 @@ test('basic examples', function (t) {
     const s = z32.encode('The quick brown fox jumps over the lazy dog. 👀')
     const b = z32.decode(s)
 
-    t.is(s, 'ktwgkedtqiwsg43ycj3g675qrbug66bypj4s4hdurbzzc3m1rb4go3jyptozw6jyctzsqmty6nx3dyy')
+    t.is(
+      s,
+      'ktwgkedtqiwsg43ycj3g675qrbug66bypj4s4hdurbzzc3m1rb4go3jyptozw6jyctzsqmty6nx3dyy'
+    )
     t.is(b.toString(), 'The quick brown fox jumps over the lazy dog. 👀')
   }
 })
