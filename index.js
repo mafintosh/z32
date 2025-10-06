@@ -113,17 +113,13 @@ function quintet(s, i) {
   const v = s.charCodeAt(i)
 
   if (v < MIN || v > MAX) {
-    throw Error(
-      'Invalid character in base32 input: "' + s[i] + '" at position ' + i
-    )
+    throw Error(`Invalid character in base32 input: "${s[i]}" at position ${i}`)
   }
 
   const bits = REVERSE[v - MIN]
 
   if (bits === -1) {
-    throw Error(
-      'Invalid character in base32 input: "' + s[i] + '" at position ' + i
-    )
+    throw Error(`Invalid character in base32 input: "${s[i]}" at position ${i}`)
   }
 
   return bits
