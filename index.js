@@ -16,14 +16,14 @@ exports.encode = encode
 exports.decode = decode
 exports.ALPHABET = ALPHABET
 
-function decode (s, out) {
+function decode(s, out) {
   let pb = 0
   let ps = 0
 
   const r = s.length & 7
   const q = (s.length - r) / 8
 
-  if (!out) out = b4a.allocUnsafe(Math.ceil(s.length * 5 / 8))
+  if (!out) out = b4a.allocUnsafe(Math.ceil((s.length * 5) / 8))
 
   // 0 5 2 7 4 1 6 3 (+5 mod 8)
   for (let i = 0; i < q; i++) {
@@ -79,7 +79,7 @@ function decode (s, out) {
   return out.subarray(0, pb)
 }
 
-function encode (buf) {
+function encode(buf) {
   if (typeof buf === 'string') buf = b4a.from(buf)
 
   const max = buf.byteLength * 8
@@ -105,7 +105,7 @@ function encode (buf) {
   return s
 }
 
-function quintet (s, i) {
+function quintet(s, i) {
   if (i > s.length) {
     return 0
   }
@@ -113,13 +113,17 @@ function quintet (s, i) {
   const v = s.charCodeAt(i)
 
   if (v < MIN || v > MAX) {
-    throw Error('Invalid character in base32 input: "' + s[i] + '" at position ' + i)
+    throw Error(
+      'Invalid character in base32 input: "' + s[i] + '" at position ' + i
+    )
   }
 
   const bits = REVERSE[v - MIN]
 
   if (bits === -1) {
-    throw Error('Invalid character in base32 input: "' + s[i] + '" at position ' + i)
+    throw Error(
+      'Invalid character in base32 input: "' + s[i] + '" at position ' + i
+    )
   }
 
   return bits

@@ -8,7 +8,7 @@ npm install z32
 
 ## Usage
 
-``` js
+```js
 const z32 = require('z32')
 
 const s = z32.encode('Hello, World!')
